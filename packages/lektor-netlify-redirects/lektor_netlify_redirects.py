@@ -17,7 +17,7 @@ class CopyPublisher(Publisher):
         items = myQuery.filter(F._model == 'portal')
         output_location = self.output_path
 
-        with open('{}/_redirect'.format(output_location), 'wb') as redirect_file:
+        with open('{}/_redirect'.format(output_location), 'w+') as redirect_file:
             for item in items:
                 for block in item['body'].blocks:
                     try:
