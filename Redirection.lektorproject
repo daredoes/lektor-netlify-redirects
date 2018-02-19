@@ -5,4 +5,4 @@ name = Redirection
 name = Production
 enabled = yes
 default = yes
-target = redirect://localhost/build
+target = copy://localhost/build
