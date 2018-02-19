@@ -49,31 +49,9 @@ class NetlifyRedirectsPlugin(Plugin):
     description = u'Automatically creates redirects on netlify'
 
     def on_setup_env(self, **extra):
-        pass
-        #self.env.add_publisher('redirect', CopyPublisher)
+        self.env.add_publisher('redirect', CopyPublisher)
 
     def on_process_template_context(self, context, **extra):
         def test_function():
             return 'Value from plugin %s' % self.name
         context['test_function'] = test_function
-
-    def on_after_build_all(self, builder, **options):
-        pad = self.env.new_pad()
-        myQuery = Query('/', pad)
-        items = myQuery.filter(F._model == 'portal')
-        output_location = self.builder.destination_path
-        #print(output_location)
-        with open('{}/_redirect'.format(output_location), 'wb') as redirect_file:
-            for item in items:
-                for block in item['body'].blocks:
-                    try:
-                        status = block['status']
-                    except KeyError as e:
-                        status = ''
-                    try:
-                        slug = quote_plus(block['slug'])
-                        redirect_file.write("{} {} {}".format(
-                        "/{}/{}".format(item['_slug'], slug),
-                        block['url'], status))
-                    except KeyError as e:
-                        yield 'skipping {}'.format(block['title'])
