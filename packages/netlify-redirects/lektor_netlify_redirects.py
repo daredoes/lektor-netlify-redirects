@@ -15,9 +15,20 @@ class CopyPublisher(Publisher):
         pad = self.env.new_pad()
         myQuery = Query('/', pad)
         items = myQuery.filter(F._model == 'portal')
-        output_location = self.output_path
-        #print(output_location)
-        with open('{}/_redirect'.format(output_location), 'wb') as redirect_file:
+
+
+        target_dir = os.getcwd() + target_url.path
+        yield "copying to local directory %s" % target_dir
+
+        # Clear the target directory if it exists
+        yield "clearing target directory"
+        shutil.rmtree(target_dir, ignore_errors=True)
+
+        # Copy the build output to the target directory
+        yield "copying tree"
+        shutil.copytree(self.output_path, target_dir)
+
+        with open('{}/_redirect'.format(target_dir), 'wb') as redirect_file:
             for item in items:
                 for block in item['body'].blocks:
                     try:
@@ -32,16 +43,6 @@ class CopyPublisher(Publisher):
                     except KeyError as e:
                         yield 'skipping {}'.format(block['title'])
 
-        target_dir = os.getcwd() + target_url.path
-        yield "copying to local directory %s" % target_dir
-
-        # Clear the target directory if it exists
-        yield "clearing target directory"
-        shutil.rmtree(target_dir, ignore_errors=True)
-
-        # Copy the build output to the target directory
-        yield "copying tree"
-        shutil.copytree(self.output_path, target_dir)
 
 
 class NetlifyRedirectsPlugin(Plugin):
