@@ -5,6 +5,8 @@ setup(
     version='0.1',
     author=u'DareDoes',
     author_email='me@daredoes.work',
+    url='https://daredoes.work',
+    description='A basic application for redirects in netlify',
     license='MIT',
     py_modules=['lektor_netlify_redirects'],
     entry_points={
