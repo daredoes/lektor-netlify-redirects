@@ -16,6 +16,7 @@ class CopyPublisher(Publisher):
         myQuery = Query('/', pad)
         items = myQuery.filter(F._model == 'portal')
         output_location = self.output_path
+        os.mknod('{}/_redirect'.format(output_location))
 
         with open('{}/_redirect'.format(output_location), 'w+') as redirect_file:
             for item in items:
