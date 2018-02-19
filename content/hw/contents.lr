@@ -1,0 +1,18 @@
+_model: portal
+---
+title: Homework
+---
+body:
+
+#### portal ####
+text: This is a description
+----
+title: Check out this cool link
+----
+url: https://google.com
+----
+slug: google
+----
+status:
+----
+public: yes

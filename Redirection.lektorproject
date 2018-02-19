@@ -1,0 +1,8 @@
+[project]
+name = Redirection
+
+[servers.production]
+name = Production
+enabled = yes
+default = yes
+target = redirect://localhost/build

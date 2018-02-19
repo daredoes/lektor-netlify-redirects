@@ -1,2 +1,1 @@
-# netlify-redirection
-Redirection for netlify
+Redirection
