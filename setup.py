@@ -2,17 +2,23 @@ from setuptools import setup
 
 
 setup(
-    name='netlify-redirects',
-    author='DareDoes',
+    name='lektor-netlify-redirects',
+    version='1.0',
+    author=u'DareDoes',
     author_email='me@daredoes.work',
-    version='0.1',
-    url='http://github.com/daredoes/lektor-netlify-redirects',
+    url='https://github.com/daredoes/lektor-netlify-redirects',
+    description='Adds Netlify style redirects to Lektor',
     license='MIT',
-    packages=['lektor_netlify_redirects'],
-    description='Adds redirects to netlify',
+    py_modules=['lektor_netlify_redirects'],
+    classifiers=[
+        'Framework :: Lektor',
+        'Environment :: Web Environment',
+        'Environment :: Plugins',
+        'License :: OSI Approved :: MIT License',
+    ],
     entry_points={
         'lektor.plugins': [
-            'hello-world = lektor_netlify_redirects:NetlifyRedirectsPlugin',
+            'netlify-redirects = lektor_netlify_redirects:NetlifyRedirectsPlugin',
         ]
-    },
+    }
 )
