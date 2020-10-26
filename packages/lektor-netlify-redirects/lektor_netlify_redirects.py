@@ -5,7 +5,11 @@ from lektor.utils import get_cache_dir
 from lektor.project import Project
 from lektor.publisher import Publisher
 
-from urllib import quote_plus
+try:
+    from urllib import quote_plus  # Python 2.X
+except ImportError:
+    from urllib.parse import quote_plus  # Python 3+
+
 import os, shutil
 
 
